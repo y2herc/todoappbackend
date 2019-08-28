@@ -1,7 +1,6 @@
 package com.example.ToDoListApp.DAO;
 
-import com.example.ToDoListApp.Model.todolistdb;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.ToDoListApp.Model.todolist;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +11,6 @@ import java.util.List;
 public class ToDoDao implements DBInterfaceDao {
 
     final String query_sql="select LISTITEM from todolist";
-    final String addItem_query="insert into todolist (Listitem)value(:message)";
 
     @PersistenceContext
     private EntityManager em;
@@ -39,7 +37,7 @@ public class ToDoDao implements DBInterfaceDao {
     @Override
     @Transactional
     public void addItem(String item) {
-        todolistdb temp=new todolistdb();
+        todolist temp=new todolist();
         temp.setListItem(item);
         em.persist(temp);
     }
@@ -47,7 +45,10 @@ public class ToDoDao implements DBInterfaceDao {
     @Override
     @Transactional
     public void removeItem(String item) {
-        todolistdb temp=em.find(todolistdb.class,item);
-        em.remove(temp);
+        int i=em.createQuery("delete from todolist where LISTITEM= :item").setParameter("item",item).executeUpdate();
+        // int i=findItembyID(item);
+        System.out.println("done");
+
     }
+
 }

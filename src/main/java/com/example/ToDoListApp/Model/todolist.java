@@ -6,7 +6,7 @@ import org.jboss.logging.Field;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Todolist")
+@Table(name = "todolist")
 public class todolist {
 
     @Id

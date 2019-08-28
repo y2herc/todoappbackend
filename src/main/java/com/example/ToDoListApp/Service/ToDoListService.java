@@ -1,10 +1,7 @@
 package com.example.ToDoListApp.Service;
 
 import com.example.ToDoListApp.DAO.ToDoDao;
-import com.example.ToDoListApp.Model.todolistdb;
-import com.example.ToDoListApp.ToDoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
