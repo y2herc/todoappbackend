@@ -47,8 +47,11 @@ public class ToDoController {
     }
 
     @PostMapping("/removeItem")
-    public void removeItem(@RequestParam(name = "item")String item)
+    public boolean removeItem(@RequestParam(name = "item")String item)
     {
-        toDoDao.removeItem(item);
+        if(toDoDao.removeItem(item))
+            return true;
+        else
+            return false;
     }
 }

@@ -44,10 +44,13 @@ public class ToDoDao implements DBInterfaceDao {
 
     @Override
     @Transactional
-    public void removeItem(String item) {
-        int i=em.createQuery("delete from todolist where LISTITEM= :item").setParameter("item",item).executeUpdate();
+    public boolean removeItem(String item) {
+        int i=em.createQuery("delete from todolist where LISTITEM= :item ").setParameter("item",item).executeUpdate();
         // int i=findItembyID(item);
-        System.out.println("done");
+        if(i==1)
+            return true;
+        else
+            return false;
 
     }
 

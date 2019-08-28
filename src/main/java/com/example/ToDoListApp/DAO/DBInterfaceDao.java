@@ -11,5 +11,5 @@ public interface DBInterfaceDao {
     public void addItem(String item);
 
     @Transactional
-    void removeItem(String item);
+    boolean removeItem(String item);
 }
