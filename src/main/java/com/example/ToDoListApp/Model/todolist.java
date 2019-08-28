@@ -6,8 +6,8 @@ import org.jboss.logging.Field;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TODOLIST")
-public class todolistdb {
+@Table(name = "Todolist")
+public class todolist {
 
     @Id
     @Column(name = "ID")
