@@ -8,7 +8,7 @@ public interface DBInterfaceDao {
 
     public List<String> getAll();
     public String getItem(int id);
-    public void addItem(String item);
+    public void addItem(String listName,String listItem);
 
     @Transactional
     boolean removeItem(String item);

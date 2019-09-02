@@ -6,6 +6,7 @@ import com.example.ToDoListApp.Repo.ToDoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Produces;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public class ToDoController {
 
     }
 
-    @GetMapping(path="/alldao")
+    @GetMapping(path="/alldao",produces="application/json")
     public List<String> Alldao(){
 
         return toDoDao.getAll();
@@ -41,9 +42,9 @@ public class ToDoController {
     }
 
     @PostMapping("/addItem")
-    public void addItem(@RequestParam(name = "item")String item)
+    public void addItem(@RequestParam(name = "list")String listName,@RequestParam(name = "item")String listItem)
     {
-        toDoDao.addItem(item);
+        toDoDao.addItem(listName,listItem);
     }
 
     @PostMapping("/removeItem")
@@ -53,5 +54,12 @@ public class ToDoController {
             return true;
         else
             return false;
+    }
+
+    @PostMapping("/removeAll")
+    public void removeAll()
+    {
+        toDoRepo.deleteAll();
+
     }
 }
