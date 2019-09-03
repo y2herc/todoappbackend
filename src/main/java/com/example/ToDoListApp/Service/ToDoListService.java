@@ -1,6 +1,7 @@
 package com.example.ToDoListApp.Service;
 
 import com.example.ToDoListApp.DAO.ToDoDao;
+import com.example.ToDoListApp.Model.ListItem;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class ToDoListService {
 
     private static final String[] allTodos = {"Daddy", "Mommy", "Brother", "Sister", "Dog"};
 
-    public List<String> getAll(){
+    public Iterable<ListItem> getAll(){
 
         return toDoDao.getAll();
     }

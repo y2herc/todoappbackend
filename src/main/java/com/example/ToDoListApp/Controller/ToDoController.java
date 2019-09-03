@@ -1,12 +1,16 @@
 package com.example.ToDoListApp.Controller;
 
 import com.example.ToDoListApp.DAO.ToDoDao;
-import com.example.ToDoListApp.Model.todolist;
+import com.example.ToDoListApp.Model.ListItem;
+import com.example.ToDoListApp.Model.Todolist;
+import com.example.ToDoListApp.Repo.ListItemRepo;
 import com.example.ToDoListApp.Repo.ToDoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,25 +22,30 @@ public class ToDoController {
     ToDoRepo toDoRepo;
 
     @Autowired
+    ListItemRepo listItemRepo;
+
+    @Autowired
     ToDoDao toDoDao;
 
     @GetMapping(path="/all")
+    @Produces("text/plain")
     public @ResponseBody
-    Iterable<todolist> All(){
+    Iterable<ListItem> All(){
 
-        return toDoRepo.findAll();
+        return listItemRepo.findAll();
 
     }
 
-    @GetMapping(path="/alldao",produces="application/json")
-    public List<String> Alldao(){
+    @GetMapping(path="/alldao")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Iterable<ListItem> Alldao(){
 
         return toDoDao.getAll();
 
     }
 
     @RequestMapping("/ListItem")
-    public Optional<todolist> ListItem(@RequestParam(name = "id") int id){
+    public Optional<Todolist> ListItem(@RequestParam(name = "id") int id){
 
             return toDoRepo.findById(id);
     }
@@ -48,18 +57,16 @@ public class ToDoController {
     }
 
     @PostMapping("/removeItem")
-    public boolean removeItem(@RequestParam(name = "item")String item)
+    public boolean removeItem(@RequestParam(name = "listItemId")Integer listItemId)
     {
-        if(toDoDao.removeItem(item))
-            return true;
-        else
-            return false;
+        return toDoDao.removeItem(listItemId);
     }
 
     @PostMapping("/removeAll")
     public void removeAll()
     {
         toDoRepo.deleteAll();
+        listItemRepo.deleteAll();
 
     }
 }

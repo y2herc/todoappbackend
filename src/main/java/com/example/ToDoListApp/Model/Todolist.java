@@ -5,17 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "todolist")
-public class todolist {
+@Table(name = "TODOLIST")
+public class Todolist {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "todolist_id")
+    @GeneratedValue
     private Integer Id;
 
     @Column
     private String listName;
 
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany( mappedBy ="todolist",cascade = {CascadeType.ALL})
     private List<ListItem> listItems=new ArrayList<ListItem>();
 
 
